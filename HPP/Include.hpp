@@ -3,13 +3,11 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+#include <sstream>
 #include <utility>
 #include <cstdio>
 #include <cstdlib>
-#include <vector>
-#include <cmath>
-#include <ctime>
-
 using namespace std;
 
 #endif /* INCLU_HPP */

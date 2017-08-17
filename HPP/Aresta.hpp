@@ -1,18 +1,20 @@
 #ifndef __ARESTA_HPP__
 #define __ARESTA_HPP__
 
-#include "Include.hpp"
+  #include "Include.hpp"
+  #include "Vertice.hpp"
+  #include "Cor.hpp"
 
-class Aresta{
-public:
-  Aresta(int cor, int peso, int fim);
-  void Print();
-
-  friend class Node;
-private:
-  int cor;//Identifica a cor da Aresta no Grasp
-  int fim; //Indica o Node Final
-  int peso;
-};
+  class Aresta{
+  public:
+    Aresta(Vertice* inicio, int peso, Vertice* fim);
+    void setCor(Cor* cor);
+    void Print();
+  private:
+    Vertice* inicio; //Indica o Vertice Final
+    Cor* cor;//Identifica a cor da Aresta no Grasp
+    Vertice* fim; //Indica o Vertice Final
+    int peso;
+  };
 
 #endif //__ARESTA_HPP__
