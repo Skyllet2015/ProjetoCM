@@ -5,5 +5,5 @@ Vertice::Vertice(int nome){
 }
 
 void Vertice::Print(){
-  cout<<"Inicio: "<<this->nome<<endl;
+  cout<<this->nome;
 }

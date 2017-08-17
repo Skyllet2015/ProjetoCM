@@ -11,13 +11,17 @@
   public:
     Grasp(float adaptacao, int maxInt);
     int Inicializar();
-    void newAresta(const string* str, char delim=',');
-    int Converter(string str);
+    void Adaptacao();
+    Vertice* Busca(int chave);
+    Cor* BuscaCor(int pesoMin);
     void Print();
   private:
     float adaptacao; //Define o nivel de adaptação do grasp
     int maxInt; //Critério de parada do algoritmo
+    int coresIniciais;
     vector<Aresta*> vectorAresta;
+    vector<Vertice* > vectorVertice;
+    vector<Cor* > vectorCores;
   };
 
 #endif //__GRASP_HPP__

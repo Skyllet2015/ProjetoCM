@@ -12,11 +12,18 @@ void Aresta::setCor(Cor* cor){
 }
 
 void Aresta::Print(){
-  cout<<"Inicio: ";
-  this->inicio->Print();
+  cout<<endl<<"Inicio: ";
+  inicio->Print();
+  cout<<endl;
   cout<<"Cor: ";
-  this->cor->Print();
+  if(cor == NULL){
+    cout<<"-1"<<endl;
+  }else{
+    this->cor->Print();
+    cout<<endl;
+  }
   cout<<"Peso: "<<this->peso<<endl;
   cout<<"Fim: ";
-  this->fim->Print();
+  fim->Print();
+  cout<<endl<<endl;
 }

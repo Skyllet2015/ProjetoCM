@@ -8,6 +8,7 @@
     Cor(int identificador, float pesoMinimo, float pesoMaximo);
     void setCor(Cor* cor);
     void Print();
+    friend class Grasp;
   private:
     int identificador;
     float pesoMinimo;

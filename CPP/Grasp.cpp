@@ -2,47 +2,76 @@
 
 Grasp::Grasp(float adaptacao, int maxInt){
   this->adaptacao = adaptacao;
+  this->coresIniciais = 0;
   this->maxInt = maxInt;
 }
 
 int Grasp::Inicializar(){
-  FILE * arq;
-  arq = fopen("Entrada.txt", "r");
-  if (arq == NULL) {
-    cout << "Não Foi Possível abrir" << endl;
-    return 1;
-  }
-  int i = 1;
-  char Linha[100];
-  while (fgets(Linha, MAX, arq) != NULL);
-    for (int i = 0; i < MAX; i++) {
-    entrada += arvore[i];
-  }
-  fclose(arq);
-}
+  bool cont = true;
+  while(cont){
+    int inicio = -1;
+    int fim = -1;
+    int peso = -1;
+    cout<<"Digite o Vertice de início: ";
+    cin>>inicio;
+    cout<<"Digite o Vertice do fim: ";
+    cin>>fim;
+    cout<<"Digite o Peso da Aresta: ";
+    cin>>peso;
 
-void Grasp::newAresta(const string* str, char delim=','){
-    stringstream ss(str);
-    string tok;
-    vector<string> vec;
-    while (getline(ss, tok, delim)) {
-        if (!tok.empty())
-            vec.push_back(tok);
-    }
-    Vertice* p1 = new Vertice(Converter(vec[0]));
-    Vertice* p2 = new Vertice(Converter(vec[1]));
-    Aresta* A1 = new Aresta(p1, Converter(vec[2]), p2);
+    Aresta* A1 = new Aresta(Busca(inicio), peso, Busca(fim));
     vectorAresta.push_back(A1);
+
+    cout<<"Digite 1 para inserir um novo elemento ou 0 para sair: ";
+    cin>>cont;
+
+    int controle = 0;
+    for(int i = 0; i < vectorAresta.size(); i++){
+      if(vectorCores.size() == 0){
+        Adaptacao();
+      }else{
+        vectorAresta[i]->cor = BuscaCor(vectorAresta[i]->peso);
+      }
+    }
+  }
 }
 
-int Grasp::Converter(string str){
-    istringstream iss(str);
-    int retorno;
-    iss >> retorno;
-    return retorno;
+Vertice* Grasp::Busca(int chave){
+  for(int i = 0; i < vectorVertice.size(); i++){
+    if(vectorVertice[i]->nome == chave){
+      return vectorVertice[i];
+    }
+  }
+  Vertice* novo = new Vertice(chave);
+  vectorVertice.push_back(novo);
+  return novo;
+}
+
+Cor* Grasp::BuscaCor(int pesoMin){
+  Cor* ret = NULL;
+  if(vectorCores.size() == 0){
+    Cor* nova = new Cor(0, pesoMin, pesoMin+10);
+    vectorCores.push_back(nova);
+    ret = nova;
+  }for(int i = 0; i < vectorCores.size(); i++){
+    if(vectorCores[i]->pesoMinimo >= pesoMin){
+      ret = vectorCores[i];
+    }
+  }if(ret == NULL){
+    Cor* nova = new Cor(vectorCores.size()+1, pesoMin, pesoMin+10);
+    vectorCores.push_back(nova);
+    ret = nova;
+  }
+  return ret;
+}
+
+void Grasp::Adaptacao(){
+  this->coresIniciais = (this->vectorAresta.size() * this->adaptacao);
 }
 
 void Grasp::Print(){
+  cout<<"Quantidade de Arestas: "<<vectorAresta.size()<<endl;
+  cout<<"Quantidade de Vertices: "<<vectorVertice.size()<<endl;
   for(int i = 0; i < vectorAresta.size(); i++){
     vectorAresta[i]->Print();
   }

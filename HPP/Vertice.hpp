@@ -6,7 +6,7 @@
   public:
     Vertice(int nome);
     void Print();
-
+    friend class Grasp;
   private:
     int nome; //Identificador do Objeto Vertice
   };
